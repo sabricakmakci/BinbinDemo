@@ -1,4 +1,6 @@
+import 'package:binbin/feature/login/verification_view.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -8,6 +10,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  TextEditingController controller = TextEditingController();
+  String initalCountry = 'TR';
+  PhoneNumber number = PhoneNumber(isoCode: "TR");
   bool value1 = false;
   bool value2 = false;
   bool value3 = false;
@@ -32,7 +37,35 @@ class _LoginViewState extends State<LoginView> {
                     style: TextStyle(fontSize: 13, color: Colors.black),
                   ),
                 ),
-                spaceBox(500),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.grey)),
+                  child: Stack(
+                    children: [
+                      InternationalPhoneNumberInput(
+                        formatInput: true,
+                        textFieldController: controller,
+                        initialValue: number,
+                        autoValidateMode: AutovalidateMode.disabled,
+                        ignoreBlank: false,
+                        inputBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: Colors.pink,
+                        )),
+                        keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+                        selectorConfig: const SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET),
+                        inputDecoration: const InputDecoration(border: InputBorder.none, hintText: "(###) ### ## ##"),
+                        onInputChanged: (value) {},
+                        onSaved: (PhoneNumber number) {
+                          print('On Saved: $number');
+                        },
+                      )
+                    ],
+                  ),
+                ),
+                spaceBox(350),
                 Row(
                   children: [
                     Checkbox(
@@ -109,7 +142,9 @@ class _LoginViewState extends State<LoginView> {
                         minimumSize: const Size(400, 50),
                         backgroundColor: Colors.cyan,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: ((context) => const VerifationView())));
+                    },
                     child: const Text("Devam Et"))
               ],
             ),
