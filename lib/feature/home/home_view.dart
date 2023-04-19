@@ -11,9 +11,15 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
+      drawer: const Drawer(
+        child: Text(""),
+      ),
       body: Stack(
         children: [
           FlutterMap(
@@ -26,6 +32,38 @@ class _HomeViewState extends State<HomeView> {
               ),
             ],
           ),
+          Positioned(
+              bottom: 60,
+              left: 15,
+              child: ElevatedButton.icon(
+                  icon: const Icon(Icons.document_scanner),
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(400, 50),
+                      backgroundColor: Colors.cyan,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
+                  onPressed: () {},
+                  label: const Text("Start Ride"))),
+          Positioned(
+              bottom: 120,
+              left: 15,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                ),
+                child:
+                    IconButton(onPressed: () => _scaffoldkey.currentState?.openDrawer(), icon: const Icon(Icons.menu)),
+              )),
+          Positioned(
+              bottom: 120,
+              right: 15,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                ),
+                child: IconButton(onPressed: () {}, icon: const Icon(Icons.location_searching)),
+              ))
         ],
       ),
     );
