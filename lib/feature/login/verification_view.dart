@@ -1,3 +1,4 @@
+import 'package:binbin/feature/home/home_view.dart';
 import 'package:binbin/product/models/otp_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -77,7 +78,7 @@ class _VerifationViewState extends State<VerifationView> {
                         backgroundColor: Colors.cyan,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: ((context) => const VerifationView())));
+                      Navigator.push(context, MaterialPageRoute(builder: ((context) => const HomeView())));
                     },
                     child: const Text("Devam Et"))
               ],
