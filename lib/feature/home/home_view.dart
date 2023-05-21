@@ -23,13 +23,25 @@ class _HomeViewState extends State<HomeView> {
       body: Stack(
         children: [
           FlutterMap(
-            options: MapOptions(center: LatLng(41.000678, 40.591148), zoom: 10),
+            options: MapOptions(center: LatLng(41.0097612, 29.2216882), zoom: 15),
             layers: [
               TileLayerOptions(
                 urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 //change base_snow_map to pistes
                 subdomains: ['a', 'b', 'c'],
               ),
+              MarkerLayerOptions(markers: [
+                Marker(
+                    point: LatLng(41.0097612, 29.2216882),
+                    builder: (_) {
+                      return Container(
+                        height: 50,
+                        width: 50,
+                        decoration: const BoxDecoration(color: Colors.cyan, shape: BoxShape.circle),
+                        child: const Icon(Icons.home),
+                      );
+                    })
+              ])
             ],
           ),
           Positioned(
